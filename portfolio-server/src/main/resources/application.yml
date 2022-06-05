@@ -3,7 +3,6 @@ servlet:
 
 
 spring:
-
   profiles:
     active: test
 
