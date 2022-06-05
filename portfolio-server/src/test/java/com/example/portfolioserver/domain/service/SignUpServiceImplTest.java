@@ -1,11 +1,10 @@
 package com.example.portfolioserver.domain.service;
 
 import com.example.portfolioserver.domain.member.entity.Member;
-import com.example.portfolioserver.domain.member.service.MemberService;
+import com.example.portfolioserver.domain.member.service.SignUpService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -21,11 +20,12 @@ import org.slf4j.LoggerFactory;
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class MemberServiceImplTest {
+class SignUpServiceImplTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+
     @Autowired
-    private MemberService memberService;
+    private SignUpService signUpService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -40,7 +40,7 @@ class MemberServiceImplTest {
                     .name("test")
                     .build();
 
-        memberService.signUp(member);
+        signUpService.register(member);
     }
 
     @Test
@@ -59,7 +59,7 @@ class MemberServiceImplTest {
 
     @Test
      void 사용자를_이메일로_조회한다() {
-        Member member = memberService.findMemberByEmail("test@gmail.com").orElse(null);
+        Member member = signUpService.findMemberByEmail("test@gmail.com").orElse(null);
         assertThat(member, is(notNullValue()));
 
         log.info("memberInfo {} : ", member);
