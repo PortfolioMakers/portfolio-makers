@@ -1,0 +1,2 @@
+INSERT INTO Member (id,created_date, last_modified_date) VALUES (1,current_timestamp,current_timestamp);
+INSERT INTO Member (id,created_date, last_modified_date) VALUES (2,current_timestamp,current_timestamp);

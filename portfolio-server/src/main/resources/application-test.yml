@@ -3,19 +3,24 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
 
   datasource:
-    url: jdbc:h2:~/localdb/externship-h2-db
+    url: jdbc:h2:tcp://localhost/~/portfolio-server-h2-db
     username: sa
     password:
     driver-class-name: org.h2.Driver
+    hikari:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
-
+    defer-datasource-initialization : true
 logging.level:
   org.hibernate.SQL: debug
