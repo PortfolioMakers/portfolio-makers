@@ -41,8 +41,4 @@ public class EducationalHistory extends BaseTimeEntity {
         this.periodFrom = periodFrom;
         this.periodTo = periodTo;
     }
-
-    public void setPortfolio(Portfolio portfolio) {
-        this.portfolio = portfolio;
-    }
 }

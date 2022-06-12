@@ -2,7 +2,9 @@ package com.example.portfolioserver.domain.portfolio.dto;
 
 import com.example.portfolioserver.domain.basicinfo.dto.BasicInfoSearchDto;
 import com.example.portfolioserver.domain.career.dto.CareerSearchDto;
+import com.example.portfolioserver.domain.career.entity.Career;
 import com.example.portfolioserver.domain.educationalhistory.dto.EducationalHistorySearchDto;
+import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistory;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import lombok.Getter;
 
@@ -19,14 +21,14 @@ public class PortfolioSearchDto {
     private List<EducationalHistorySearchDto> educationalHistorySearchDtos;
     private List<CareerSearchDto> careerSearchDtos;
 
-    public PortfolioSearchDto(Portfolio portfolio) {
+    public PortfolioSearchDto(Portfolio portfolio, List<EducationalHistory> educationalHistories, List<Career> careers) {
         this.createdDate = portfolio.getCreatedDate();
         this.lastModifiedDate = portfolio.getLastModifiedDate();
         this.basicInfoSearchDto = new BasicInfoSearchDto(portfolio.getBasicInfo());
-        this.educationalHistorySearchDtos = portfolio.getEducationalHistoryList().stream()
+        this.educationalHistorySearchDtos = educationalHistories.stream()
                 .map(educationalHistory -> new EducationalHistorySearchDto(educationalHistory))
                 .collect(Collectors.toList());
-        this.careerSearchDtos = portfolio.getCareerList().stream()
+        this.careerSearchDtos = careers.stream()
                 .map(career -> new CareerSearchDto(career))
                 .collect(Collectors.toList());
     }

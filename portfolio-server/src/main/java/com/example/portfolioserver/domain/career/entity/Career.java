@@ -31,15 +31,12 @@ public class Career extends BaseTimeEntity {
     private LocalDate periodTo;
 
     @Builder
-    public Career(Long id, String company, String duty, LocalDate periodFrom, LocalDate periodTo) {
+    public Career(Long id, String company, String duty, LocalDate periodFrom, LocalDate periodTo, Portfolio portfolio) {
         this.id = id;
         this.company = company;
         this.duty = duty;
         this.periodFrom = periodFrom;
         this.periodTo = periodTo;
-    }
-
-    public void setPortfolio(Portfolio portfolio) {
         this.portfolio = portfolio;
     }
 }

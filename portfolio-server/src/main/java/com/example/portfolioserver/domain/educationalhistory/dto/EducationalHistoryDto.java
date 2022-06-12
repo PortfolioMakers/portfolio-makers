@@ -1,6 +1,7 @@
 package com.example.portfolioserver.domain.educationalhistory.dto;
 
 import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistory;
+import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -14,9 +15,10 @@ public class EducationalHistoryDto {
     private LocalDate periodFrom;
     private LocalDate periodTo;
 
-    public EducationalHistory getEntity() {
+    public EducationalHistory getEntity(Portfolio portfolio) {
         return EducationalHistory.builder()
                 .id(id)
+                .portfolio(portfolio)
                 .school(school)
                 .majorType(majorType)
                 .majorDepartment(majorDepartment)
