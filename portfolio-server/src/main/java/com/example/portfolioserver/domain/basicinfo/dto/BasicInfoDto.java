@@ -7,10 +7,16 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 public class BasicInfoDto {
+
     private Long id;
-    @NotBlank(message = "Testsetest")
+
+    @NotBlank(message = "{BasicInfoDto.name.not.blank}")
     private String name;
+
+    @NotBlank(message = "{BasicInfoDto.email.not.blank}")
     private String email;
+
+    @NotBlank(message = "{BasicInfoDto.mobile.not.blank}")
     private String mobile;
 
     public BasicInfo getEntity() {

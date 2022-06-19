@@ -12,9 +12,9 @@ import java.util.List;
 @Getter
 public class PortfolioDto {
 
-    @NotNull
     @Valid
     private BasicInfoDto basicInfoDto;
+    @Valid
     private List<EducationalHistoryDto> educationalHistoryDtos;
     private List<CareerDto> careerDtos;
 }
