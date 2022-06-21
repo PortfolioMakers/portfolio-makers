@@ -1,5 +1,7 @@
 package com.example.portfolioserver.domain.portfolio.application;
 
+import com.example.portfolioserver.domain.award.dao.AwardRepository;
+import com.example.portfolioserver.domain.award.entity.Award;
 import com.example.portfolioserver.domain.career.dao.CareerRepository;
 import com.example.portfolioserver.domain.career.entity.Career;
 import com.example.portfolioserver.domain.educationalhistory.dao.EducationalHistoryRepository;
@@ -7,6 +9,10 @@ import com.example.portfolioserver.domain.educationalhistory.entity.EducationalH
 import com.example.portfolioserver.domain.portfolio.dao.PortfolioRepository;
 import com.example.portfolioserver.domain.portfolio.dto.PortfolioSearchDto;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
+import com.example.portfolioserver.domain.professionalexperience.dao.ProfessionalExperienceRepository;
+import com.example.portfolioserver.domain.professionalexperience.entity.ProfessionalExperience;
+import com.example.portfolioserver.domain.skill.dao.SkillRepository;
+import com.example.portfolioserver.domain.skill.entity.Skill;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +25,26 @@ public class PortfolioSearchServiceImpl implements PortfolioSearchService {
     private final PortfolioRepository portfolioRepository;
     private final EducationalHistoryRepository educationalHistoryRepository;
     private final CareerRepository careerRepository;
+    private final ProfessionalExperienceRepository professionalExperienceRepository;
+    private final AwardRepository awardRepository;
+    private final SkillRepository skillRepository;
 
     public PortfolioSearchDto Search(Long id) {
         Portfolio portfolio = portfolioRepository.findById(id).
                 orElseThrow(() -> new IllegalArgumentException(""));
         List<EducationalHistory> educationalHistories = educationalHistoryRepository.findAllByPortfolio(portfolio);
         List<Career> careers = careerRepository.findAllByPortfolio(portfolio);
-        return new PortfolioSearchDto(portfolio, educationalHistories, careers);
+        List<ProfessionalExperience> professionalExperiences = professionalExperienceRepository.findAllByPortfolio(portfolio);
+        List<Award> awards = awardRepository.findAllByPortfolio(portfolio);
+        List<Skill> skills = skillRepository.findAllByPortfolio(portfolio);
+
+        return PortfolioSearchDto.builder()
+                .portfolio(portfolio)
+                .educationalHistories(educationalHistories)
+                .careers(careers)
+                .professionalExperiences(professionalExperiences)
+                .awards(awards)
+                .skills(skills)
+                .build();
     }
 }

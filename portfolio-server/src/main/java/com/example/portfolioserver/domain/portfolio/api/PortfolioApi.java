@@ -2,6 +2,7 @@ package com.example.portfolioserver.domain.portfolio.api;
 
 import com.example.portfolioserver.domain.portfolio.application.*;
 import com.example.portfolioserver.domain.portfolio.dto.PortfolioDto;
+import com.example.portfolioserver.domain.portfolio.dto.PortfolioSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,8 @@ public class PortfolioApi {
 
     @GetMapping("/{id}")
     public ResponseEntity Search(@PathVariable Long id) {
-        return ResponseEntity.ok(portfolioSearchService.Search(id));
+        PortfolioSearchDto portfolioSearchDto = portfolioSearchService.Search(id);
+        return ResponseEntity.ok(portfolioSearchDto);
     }
 
     @PatchMapping("/{id}")

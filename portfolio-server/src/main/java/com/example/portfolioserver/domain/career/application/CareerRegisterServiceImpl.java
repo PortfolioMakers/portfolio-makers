@@ -15,6 +15,6 @@ public class CareerRegisterServiceImpl implements CareerRegisterService {
     private final CareerRepository careerRepository;
 
     public void Register(Portfolio portfolio, List<CareerDto> careerDtos) {
-        careerDtos.forEach(careerDto -> careerRepository.save(careerDto.getEntity(portfolio)));
+        careerDtos.forEach(careerDto -> careerRepository.save(careerDto.toEntity(portfolio)));
     }
 }

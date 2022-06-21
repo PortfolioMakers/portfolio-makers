@@ -20,7 +20,7 @@ public class CareerEditServiceImpl implements CareerEditService {
     public void Edit(Portfolio portfolio, List<CareerDto> careerDtos) {
         List<Long> ids = careerDtos.stream().map(CareerDto::getId).filter(Objects::nonNull).collect(Collectors.toList());
         careerRepository.deleteIdsNotIn(portfolio, ids);
-        List<Career> educationalHistories = careerDtos.stream().map(careerDto -> careerDto.getEntity(portfolio)).collect(Collectors.toList());
-        careerRepository.saveAll(educationalHistories);
+        List<Career> careers = careerDtos.stream().map(careerDto -> careerDto.toEntity(portfolio)).collect(Collectors.toList());
+        careerRepository.saveAll(careers);
     }
 }

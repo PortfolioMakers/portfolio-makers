@@ -1,5 +1,6 @@
 package com.example.portfolioserver.domain.portfolio.application;
 
+import com.example.portfolioserver.domain.award.application.AwardRegisterService;
 import com.example.portfolioserver.domain.basicinfo.dao.BasicInfoRepository;
 import com.example.portfolioserver.domain.basicinfo.entity.BasicInfo;
 import com.example.portfolioserver.domain.career.application.CareerRegisterService;
@@ -9,6 +10,8 @@ import com.example.portfolioserver.domain.member.entity.Member;
 import com.example.portfolioserver.domain.portfolio.dao.PortfolioRepository;
 import com.example.portfolioserver.domain.portfolio.dto.PortfolioDto;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
+import com.example.portfolioserver.domain.professionalexperience.application.ProfessionalExperienceRegisterService;
+import com.example.portfolioserver.domain.skill.application.SkillRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +24,27 @@ public class PortfolioRegisterServiceImpl implements PortfolioRegisterService {
     private final PortfolioRepository portfolioRepository;
     private final EducationalHistoryRegisterService educationalHistoryRegisterService;
     private final CareerRegisterService careerRegisterService;
+    private final ProfessionalExperienceRegisterService professionalExperienceRegisterService;
+    private final AwardRegisterService awardRegisterService;
+    private final SkillRegisterService skillRegisterService;
 
     public Long Register(Long memberId, PortfolioDto portfolioDto) {
         Portfolio portfolio = registerPortfolio(memberId, portfolioDto);
         educationalHistoryRegisterService.Register(portfolio, portfolioDto.getEducationalHistoryDtos());
         careerRegisterService.Register(portfolio, portfolioDto.getCareerDtos());
+        professionalExperienceRegisterService.Register(portfolio, portfolioDto.getProfessionalExperienceDtos());
+        awardRegisterService.Register(portfolio, portfolioDto.getAwardDtos());
+        skillRegisterService.Register(portfolio, portfolioDto.getSkillDtos());
         return portfolio.getId();
     }
 
     private Portfolio registerPortfolio(Long memberId, PortfolioDto portfolioDto) {
-        BasicInfo basicInfo = basicInfoRepository.save(portfolioDto.getBasicInfoDto().getEntity());
-        Portfolio portfolio = Portfolio.create(getMember(memberId), basicInfo);
-        return portfolioRepository.save(portfolio);
+        BasicInfo basicInfo = basicInfoRepository.save(portfolioDto.getBasicInfoDto().toEntity());
+        Member member = getMember(memberId);
+        if(portfolioRepository.existsByMember(member)) {
+            throw new IllegalArgumentException("포트폴리오가 이미 등록되어 있습니다.");
+        }
+        return portfolioRepository.save(Portfolio.create(member, basicInfo));
     }
 
     private Member getMember(Long memberId) {

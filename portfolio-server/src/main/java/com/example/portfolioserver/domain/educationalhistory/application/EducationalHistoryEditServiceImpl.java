@@ -20,7 +20,7 @@ public class EducationalHistoryEditServiceImpl implements EducationalHistoryEdit
     public void Edit(Portfolio portfolio, List<EducationalHistoryDto> educationalHistoryDtos) {
         List<Long> ids = educationalHistoryDtos.stream().map(EducationalHistoryDto::getId).filter(Objects::nonNull).collect(Collectors.toList());
         educationalHistoryRepository.deleteIdsNotIn(portfolio, ids);
-        List<EducationalHistory> educationalHistories = educationalHistoryDtos.stream().map(educationalHistoryDto -> educationalHistoryDto.getEntity(portfolio)).collect(Collectors.toList());
+        List<EducationalHistory> educationalHistories = educationalHistoryDtos.stream().map(educationalHistoryDto -> educationalHistoryDto.toEntity(portfolio)).collect(Collectors.toList());
         educationalHistoryRepository.saveAll(educationalHistories);
     }
 }

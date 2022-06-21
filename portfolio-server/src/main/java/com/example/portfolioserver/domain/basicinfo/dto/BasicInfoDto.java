@@ -2,10 +2,12 @@ package com.example.portfolioserver.domain.basicinfo.dto;
 
 import com.example.portfolioserver.domain.basicinfo.entity.BasicInfo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
+@NoArgsConstructor
 public class BasicInfoDto {
 
     private Long id;
@@ -19,7 +21,14 @@ public class BasicInfoDto {
     @NotBlank(message = "{BasicInfoDto.mobile.not.blank}")
     private String mobile;
 
-    public BasicInfo getEntity() {
+    public BasicInfoDto(BasicInfo basicInfo) {
+        this.id = basicInfo.getId();
+        this.name = basicInfo.getName();
+        this.email = basicInfo.getEmail();
+        this.mobile = basicInfo.getMobile();
+    }
+
+    public BasicInfo toEntity() {
         return BasicInfo.builder()
                 .id(id)
                 .name(name)

@@ -15,6 +15,6 @@ public class EducationalHistoryRegisterServiceImpl implements EducationalHistory
     private final EducationalHistoryRepository educationalHistoryRepository;
 
     public void Register(Portfolio portfolio, List<EducationalHistoryDto> educationalHistoryDtos) {
-        educationalHistoryDtos.forEach(educationalHistoryDto -> educationalHistoryRepository.save(educationalHistoryDto.getEntity(portfolio)));
+        educationalHistoryDtos.forEach(educationalHistoryDto -> educationalHistoryRepository.save(educationalHistoryDto.toEntity(portfolio)));
     }
 }

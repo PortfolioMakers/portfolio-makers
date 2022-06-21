@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js"></script>
+
+</head>
+<body>
+    <form id="form">
+        <div class="form-group">
+            <h1>기본정보</h1>
+            <label>이름</label>
+            <input type="text" name="basicInfoDto[name]" id="name" class="form-control"
+                   placeholder="이름을 입력하세요">
+            <label>이메일</label>
+            <input type="email" name="basicInfoDto[email]" id="email" class="form-control"
+                   placeholder="이메일을 입력하세요">
+            <label>휴대폰</label>
+            <input type="text" name="basicInfoDto[mobile]" id="mobile" class="form-control"
+                   placeholder="휴대폰 번호를 입력하세요">
+        </div>
+        <div class="form-group">
+            <h1>학력사항</h1>]
+                <label>이름</label>
+                <input type="text" name="educationalHistoryDtos[0][school]" class="form-control"
+                       placeholder="학교명을 입력하세요">
+                <label>전공타입</label>
+                <input type="text" id="majorType" name="educationalHistoryDtos[0][majorType]" class="form-control"
+                       placeholder="전공타입을 입력하세요">
+                <label>학과</label>
+                <input type="text" id="majorDepartment" name="educationalHistoryDtos[0][majorDepartment]" class="form-control"
+                       placeholder="학과를 입력하세요">
+                <label>기간</label>
+                <input type="date" name="educationalHistoryDtos[0][periodFrom]" class="form-control">
+                ~
+                <input type="date" name="educationalHistoryDtos[0][periodTo]" class="form-control">
+
+        </div>
+        <div class="form-group">
+            <h1>경력사항</h1>
+            <label>회사명</label>
+            <input type="text" id="company" name="careerDtos[0][company]" class="form-control"
+                   placeholder="회사명을 입력하세요">
+            <label>업무</label>
+            <input type="text" id="duty" name="careerDtos[0][duty]" lass="form-control"
+                   placeholder="업무를 입력하세요">
+            <label>기간</label>
+            <input type="date" name="careerDtos[0][periodFrom]" class="form-control">
+            ~
+            <input type="date" name="careerDtos[0][periodTo]" class="form-control">
+        </div>
+        <div class="form-group">
+            <h1>대외활동 경험</h1>
+            <label>대외활동</label>
+            <input type="text" name="professionalExperienceDtos[0][experience]" class="form-control"
+                   placeholder="대외활동을 입력하세요">
+            <label>활동내용</label>
+            <input type="text" name="professionalExperienceDtos[0][contents]" class="form-control"
+                   placeholder="활동내용을 입력하세요">
+            <label>기간</label>
+            <input type="date" name="professionalExperienceDtos[0][periodFrom]" class="form-control">
+            ~
+            <input type="date" name="professionalExperienceDtos[0][periodTo]" class="form-control">
+        </div>
+        <div class="form-group">
+            <h1>수상</h1>
+            <button class="plus">추가</button>
+        </div>
+        <div class="form-group">
+            <h1>어학 / 보유기술</h1>
+            <label>이름</label>
+            <input type="text" name="skillDtos[0][name]" class="form-control"
+                   placeholder="보유 기술을 입력하세요">
+            <label>내용</label>
+            <input type="text" name="skillDtos[0][contents]" class="form-control"
+                   placeholder="보유 기술 내용을 입력하세요">
+        </div>
+        <button id="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div data-index="0" style="display: none;">
+        <button class="minus">제거</button>
+        <label>이름</label>
+        <input type="text" name="awardDtos[0][name]" class="form-control"
+               placeholder="상 이름을 입력하세요">
+        <label>수상 날짜</label>
+        <input type="date" name="awardDtos[0][awardDate]" class="form-control">
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $("#submit").on("click", function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "/portfolio/1",
+                contentType: 'application/json',
+                data: JSON.stringify($("#form").serializeJSON({useIntKeysAsArrayIndex: true})) ,
+                dataType : "json",
+                success: function() {
+                    alert("success")
+                }
+            });
+        });
+
+        $(".plus").on("click", function(e) {
+            e.preventDefault();
+            var $inputs = $(this).parent().find("[data-index]").clone();
+            var index = $inputs.data("index");
+            $inputs.removeAttr("data-index");
+            $inputs.removeAttr("style");
+            $.each($inputs.find("input"), function() {
+                $(this).attr("name", $(this).attr("name").replace("[0]", "[" + index + "]"));
+            });
+            $(this).parent().find("[data-index]").first().attr("data-index", index + 1);
+            $(this).parent().append($inputs);
+        });
+    });
+</script>
+</html>
