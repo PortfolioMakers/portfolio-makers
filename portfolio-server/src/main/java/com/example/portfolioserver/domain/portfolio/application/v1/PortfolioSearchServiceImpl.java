@@ -1,4 +1,4 @@
-package com.example.portfolioserver.domain.portfolio.application;
+package com.example.portfolioserver.domain.portfolio.application.v1;
 
 import com.example.portfolioserver.domain.award.dao.AwardRepository;
 import com.example.portfolioserver.domain.award.entity.Award;
@@ -7,7 +7,7 @@ import com.example.portfolioserver.domain.career.entity.Career;
 import com.example.portfolioserver.domain.educationalhistory.dao.EducationalHistoryRepository;
 import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistory;
 import com.example.portfolioserver.domain.portfolio.dao.PortfolioRepository;
-import com.example.portfolioserver.domain.portfolio.dto.PortfolioSearchDto;
+import com.example.portfolioserver.domain.portfolio.dto.v1.PortfolioSearchDto;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import com.example.portfolioserver.domain.professionalexperience.dao.ProfessionalExperienceRepository;
 import com.example.portfolioserver.domain.professionalexperience.entity.ProfessionalExperience;

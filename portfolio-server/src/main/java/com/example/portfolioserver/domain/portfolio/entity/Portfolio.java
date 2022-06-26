@@ -33,4 +33,8 @@ public class Portfolio extends BaseTimeEntity {
     public static Portfolio create(Member member, BasicInfo basicInfo) {
         return new Portfolio(member, basicInfo);
     }
+
+    public void editBasicInfo(String email, String mobile, String name) {
+        this.basicInfo.edit(email, mobile, name);
+    }
 }

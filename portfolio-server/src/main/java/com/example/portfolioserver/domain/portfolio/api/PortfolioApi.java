@@ -1,8 +1,10 @@
 package com.example.portfolioserver.domain.portfolio.api;
 
-import com.example.portfolioserver.domain.portfolio.application.*;
-import com.example.portfolioserver.domain.portfolio.dto.PortfolioDto;
-import com.example.portfolioserver.domain.portfolio.dto.PortfolioSearchDto;
+import com.example.portfolioserver.domain.portfolio.application.v1.PortfolioEditService;
+import com.example.portfolioserver.domain.portfolio.application.v1.PortfolioRegisterService;
+import com.example.portfolioserver.domain.portfolio.application.v1.PortfolioSearchService;
+import com.example.portfolioserver.domain.portfolio.dto.v1.PortfolioDto;
+import com.example.portfolioserver.domain.portfolio.dto.v1.PortfolioSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

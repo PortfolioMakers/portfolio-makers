@@ -3,8 +3,6 @@ package com.example.portfolioserver.domain.award.application;
 import com.example.portfolioserver.domain.award.dao.AwardRepository;
 import com.example.portfolioserver.domain.award.dto.AwardDto;
 import com.example.portfolioserver.domain.award.entity.Award;
-import com.example.portfolioserver.domain.career.dto.CareerDto;
-import com.example.portfolioserver.domain.career.entity.Career;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

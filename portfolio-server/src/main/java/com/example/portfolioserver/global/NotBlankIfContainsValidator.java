@@ -1,4 +1,4 @@
-package com.example.portfolioserver.domain.portfolio.dto;
+package com.example.portfolioserver.global;
 
 import org.apache.commons.beanutils.BeanUtils;
 

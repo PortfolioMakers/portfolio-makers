@@ -1,8 +1,5 @@
 package com.example.portfolioserver.domain.skill.application;
 
-import com.example.portfolioserver.domain.educationalhistory.dao.EducationalHistoryRepository;
-import com.example.portfolioserver.domain.educationalhistory.dto.EducationalHistoryDto;
-import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistory;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import com.example.portfolioserver.domain.skill.dao.SkillRepository;
 import com.example.portfolioserver.domain.skill.dto.SkillDto;

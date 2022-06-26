@@ -1,7 +1,6 @@
 package com.example.portfolioserver.domain.educationalhistory.dto;
 
-import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistory;
-import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
+import com.example.portfolioserver.domain.educationalhistory.entity.EducationalHistoryV2;
 import com.example.portfolioserver.global.NotBlankIfContains;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 })
 @Getter
 @NoArgsConstructor
-public class EducationalHistoryDto {
+public class EducationalHistoryV2Dto {
 
     private Long id;
     @NotBlank(message = "{EducationalHistoryDto.school.not.blank}")
@@ -25,10 +24,9 @@ public class EducationalHistoryDto {
     private LocalDate periodFrom;
     private LocalDate periodTo;
 
-    public EducationalHistory toEntity(Portfolio portfolio) {
-        return EducationalHistory.builder()
+    public EducationalHistoryV2 toEntity() {
+        return EducationalHistoryV2.builder()
                 .id(id)
-                .portfolio(portfolio)
                 .school(school)
                 .majorType(majorType)
                 .majorDepartment(majorDepartment)
@@ -37,12 +35,12 @@ public class EducationalHistoryDto {
                 .build();
     }
 
-    public EducationalHistoryDto(EducationalHistory educationalHistory) {
-        this.id = educationalHistory.getId();
-        this.school = educationalHistory.getSchool();
-        this.majorType = educationalHistory.getMajorType();
-        this.majorDepartment = educationalHistory.getMajorDepartment();
-        this.periodFrom = educationalHistory.getPeriodFrom();
-        this.periodTo = educationalHistory.getPeriodTo();
+    public EducationalHistoryV2Dto(EducationalHistoryV2 educationalHistoryV2) {
+        this.id = educationalHistoryV2.getId();
+        this.school = educationalHistoryV2.getSchool();
+        this.majorType = educationalHistoryV2.getMajorType();
+        this.majorDepartment = educationalHistoryV2.getMajorDepartment();
+        this.periodFrom = educationalHistoryV2.getPeriodFrom();
+        this.periodTo = educationalHistoryV2.getPeriodTo();
     }
 }

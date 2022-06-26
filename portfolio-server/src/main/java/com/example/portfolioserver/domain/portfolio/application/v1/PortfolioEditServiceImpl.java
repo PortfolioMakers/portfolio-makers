@@ -1,11 +1,11 @@
-package com.example.portfolioserver.domain.portfolio.application;
+package com.example.portfolioserver.domain.portfolio.application.v1;
 
 import com.example.portfolioserver.domain.award.application.AwardEditService;
 import com.example.portfolioserver.domain.basicinfo.dto.BasicInfoDto;
 import com.example.portfolioserver.domain.career.application.CareerEditService;
 import com.example.portfolioserver.domain.educationalhistory.application.EducationalHistoryEditService;
 import com.example.portfolioserver.domain.portfolio.dao.PortfolioRepository;
-import com.example.portfolioserver.domain.portfolio.dto.PortfolioDto;
+import com.example.portfolioserver.domain.portfolio.dto.v1.PortfolioDto;
 import com.example.portfolioserver.domain.portfolio.entity.Portfolio;
 import com.example.portfolioserver.domain.professionalexperience.application.ProfessionalExperienceEditService;
 import com.example.portfolioserver.domain.skill.application.SkillEditService;
@@ -38,8 +38,8 @@ public class PortfolioEditServiceImpl implements PortfolioEditService {
     private Portfolio editBasicInfo(Long id, PortfolioDto portfolioDto) {
         Portfolio portfolio = getPortfolio(id);
         BasicInfoDto basicInfoDto = portfolioDto.getBasicInfoDto();
-        portfolio.getBasicInfo().edit(basicInfoDto.getEmail(), basicInfoDto.getMobile(), basicInfoDto.getName());
-        return portfolioRepository.save(portfolio);
+        portfolio.editBasicInfo(basicInfoDto.getEmail(), basicInfoDto.getMobile(), basicInfoDto.getName());
+        return portfolio;
     }
 
     private Portfolio getPortfolio(Long id) {

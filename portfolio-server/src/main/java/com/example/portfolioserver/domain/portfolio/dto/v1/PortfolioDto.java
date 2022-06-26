@@ -1,17 +1,15 @@
-package com.example.portfolioserver.domain.portfolio.dto;
+package com.example.portfolioserver.domain.portfolio.dto.v1;
 
 import com.example.portfolioserver.domain.award.dto.AwardDto;
 import com.example.portfolioserver.domain.basicinfo.dto.BasicInfoDto;
 import com.example.portfolioserver.domain.career.dto.CareerDto;
 import com.example.portfolioserver.domain.educationalhistory.dto.EducationalHistoryDto;
 import com.example.portfolioserver.domain.professionalexperience.dto.ProfessionalExperienceDto;
-import com.example.portfolioserver.domain.professionalexperience.entity.ProfessionalExperience;
 import com.example.portfolioserver.domain.skill.dto.SkillDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
